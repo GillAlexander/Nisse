@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb = null;
     private Vector3 fixedUpdatePos = Vector3.zero;
     private Vector3 updatePos = Vector3.zero;
+    private bool hasInput = false;
+    [SerializeField] private GameObject playerVisuals = null;
 
     private void Start()
     {
@@ -22,23 +24,37 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity = this.transform.forward * movementSpeed;
+            rb.velocity = playerVisuals.transform.forward * movementSpeed;
+            hasInput = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.velocity = -this.transform.right * movementSpeed;
+            rb.velocity = -playerVisuals.transform.right * movementSpeed;
+            hasInput = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.velocity = -this.transform.forward * movementSpeed;
+            rb.velocity = -playerVisuals.transform.forward * movementSpeed;
+            hasInput = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.velocity = this.transform.right * movementSpeed;
+            rb.velocity = playerVisuals.transform.right * movementSpeed;
+            hasInput = true;
         }
 
-        transform.forward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
+        if (hasInput)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                playerVisuals.transform.forward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
+            }
+            //rb.velocity = playerVisuals.transform.forward * movementSpeed;
+        }
+            
+        //transform.forward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
 
+        hasInput = false;
         //if (Input.GetMouseButton(1))
         //{
         //    var calc = updatePos - fixedUpdatePos;

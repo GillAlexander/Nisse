@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour
             //mainCamera.transform.localRotation = Quaternion.Euler(yDegree, -mainCamera.transform.localRotation.x, 0);
             transform.RotateAround(rotateAround.position, Vector3.up, xDegree);
         }
-        var offset = new Vector3(rotateAround.position.x, transform.position.y, rotateAround.position.z);
-        transform.position = offset;
+        //var offset = new Vector3(rotateAround.position.x, transform.position.y, rotateAround.position.z);
+        //transform.position = offset;
 
         zOffset = Input.GetAxis("Mouse ScrollWheel");
         if (zOffset != 0)
